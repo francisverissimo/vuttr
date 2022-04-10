@@ -6,6 +6,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tool } from "./components/Tool";
 
 import "./styles/app.scss";
+import { AddNewTool } from "./components/AddNewTool";
 
 type ToolsType = {
   id: number;
@@ -17,6 +18,11 @@ type ToolsType = {
 
 function App() {
   const [tools, setTools] = useState<ToolsType[]>();
+
+  function openForm() {
+    const overlayForm = document.querySelector("#overlayForm");
+    overlayForm?.classList.add("active");
+  }
 
   async function getTools() {
     try {
@@ -38,6 +44,7 @@ function App() {
         <h1>VUTTR</h1>
         <h2>Very Usefull Tools to Remember</h2>
       </header>
+
       <main>
         <section id="sectionSubHeader">
           <div>
@@ -45,8 +52,9 @@ function App() {
             <input type="checkbox" name="" id="" />
             <label htmlFor="">search in tags only</label>
           </div>
-          <button><FontAwesomeIcon icon={faPlus} /> Add</button>
+          <button onClick={openForm}><FontAwesomeIcon icon={faPlus} /> Add</button>
         </section>
+
         <section id="sectionTools">
           {tools?.map(tool => {
             return (
@@ -60,6 +68,10 @@ function App() {
               />
             );
           })}
+        </section>
+
+        <section>
+          <AddNewTool />
         </section>
       </main>
     </>
