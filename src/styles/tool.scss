@@ -1,0 +1,12 @@
+#tool {
+  background: #ffdfa4;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  // max-width: 100rem;
+  border: 0.2rem solid grey;
+
+  .headerTool {
+    display: flex;
+    justify-content: space-between;
+  }
+}
