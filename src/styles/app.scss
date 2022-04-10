@@ -38,5 +38,10 @@ main {
     background: transparent;
     border: none;
     font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      font-size: 1.5rem;
+    }
   }
 }
