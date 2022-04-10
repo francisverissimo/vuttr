@@ -36,11 +36,15 @@ export function AddNewTool() {
       tags: tags?.split(" ")
     };
 
-    await fetch("http://localhost:3000/tools", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formInputValues)
-    });
+    try {
+      await fetch("http://localhost:3000/tools", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formInputValues)
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -51,7 +55,11 @@ export function AddNewTool() {
         </h3>
         <form onSubmit={addNewToolToDb}>
           <label htmlFor="">Tool name</label>
-          <input type="text" onChange={event => setTitle(event.target.value)} value={title} />
+          <input
+            type="text"
+            onChange={event => setTitle(event.target.value)}
+            value={title}
+          />
 
           <label htmlFor="">Tool link</label>
           <input
