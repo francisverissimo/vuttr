@@ -22,6 +22,7 @@ export function refreshPage() {
 
 function App() {
   const [tools, setTools] = useState<ToolsType[]>();
+  const [inputSearch, setInputSearch] = useState("");
 
   function openForm() {
     const overlayForm = document.querySelector("#overlayForm");
@@ -33,6 +34,24 @@ function App() {
       const response = await fetch("http://localhost:3000/tools");
       const data = await response.json();
       setTools(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getSeachTools(keywords: string) {
+    const inputCheckbox = document.querySelector("#seachTagsOnly");
+
+    try {
+      if (inputSearch.trim() !== "" && inputCheckbox?.ariaChecked) {
+        const response = await fetch(`http://localhost:3000/tools?tags_like=${keywords}`);
+        const data = await response.json();
+        setTools(data);
+      } else if (inputSearch.trim() !== "") {
+        const response = await fetch(`http://localhost:3000/tools?q=${keywords}`);
+        const data = await response.json();
+        setTools(data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -52,8 +71,15 @@ function App() {
       <main>
         <section id="sectionSubHeader">
           <div>
-            <input type="text" />
-            <input type="checkbox" name="" id="" />
+            <input type="text" name="inputSeach" id="inputSeach" />
+            <input
+              type="checkbox"
+              name="seachTagsOnly"
+              id="seachTagsOnly"
+              onChange={event => setInputSearch(event.target.value)}
+              value={inputSearch}
+              onKeyPress={e => {e.key === "Enter" ? getSeachTools(inputSearch) : null}}
+            />
             <label htmlFor="">search in tags only</label>
           </div>
           <button onClick={openForm}>
