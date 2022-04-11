@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { Tool } from "./components/Tool";
 import { AddNewTool } from "./components/AddNewTool";
@@ -44,11 +44,15 @@ function App() {
 
     try {
       if (inputSearch.trim() !== "" && inputCheckbox?.ariaChecked) {
-        const response = await fetch(`http://localhost:3000/tools?tags_like=${keywords}`);
+        const response = await fetch(
+          `http://localhost:3000/tools?tags_like=${keywords}`
+        );
         const data = await response.json();
         setTools(data);
       } else if (inputSearch.trim() !== "") {
-        const response = await fetch(`http://localhost:3000/tools?q=${keywords}`);
+        const response = await fetch(
+          `http://localhost:3000/tools?q=${keywords}`
+        );
         const data = await response.json();
         setTools(data);
       }
@@ -78,9 +82,11 @@ function App() {
               id="seachTagsOnly"
               onChange={event => setInputSearch(event.target.value)}
               value={inputSearch}
-              onKeyPress={e => {e.key === "Enter" ? getSeachTools(inputSearch) : null}}
             />
             <label htmlFor="">search in tags only</label>
+            <button onClick={() => getSeachTools(inputSearch)}>
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
           </div>
           <button onClick={openForm}>
             <FontAwesomeIcon icon={faPlus} /> Add
