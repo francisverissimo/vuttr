@@ -16,9 +16,9 @@ Para iniciá-lo, siga os passos abaixo:
 $ yarn ou npm i
 
 # inicie o servidor do json-server
-$ yarn server
+$ yarn server ou npm run server
 
 # agora, em outra aba do terminal ou outro terminal
 # inicie o projeto
-$ yarn dev
+$ yarn dev ou npm run dev
 ```
