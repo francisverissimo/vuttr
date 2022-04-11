@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { Tool } from "./components/Tool";
+import { AddNewTool } from "./components/AddNewTool";
 
 import "./styles/app.scss";
-import { AddNewTool } from "./components/AddNewTool";
 
 type ToolsType = {
   id: number;
@@ -15,6 +15,10 @@ type ToolsType = {
   link: string;
   tags: string[];
 };
+
+export function refreshPage() {
+  window.location.reload();
+}
 
 function App() {
   const [tools, setTools] = useState<ToolsType[]>();
@@ -52,7 +56,9 @@ function App() {
             <input type="checkbox" name="" id="" />
             <label htmlFor="">search in tags only</label>
           </div>
-          <button onClick={openForm}><FontAwesomeIcon icon={faPlus} /> Add</button>
+          <button onClick={openForm}>
+            <FontAwesomeIcon icon={faPlus} /> Add
+          </button>
         </section>
 
         <section id="sectionTools">
