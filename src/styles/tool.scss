@@ -1,5 +1,4 @@
 #tool {
-  background: #ffdfa4;
   padding: 1rem;
   margin-bottom: 2rem;
   border: 0.15rem solid black;
@@ -23,6 +22,11 @@
       font-weight: 600;
       display: flex;
       align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        font-size: 1.7rem;
+      }
 
       svg {
         margin-right: 0.5rem;

@@ -7,13 +7,15 @@ main {
 
 header {
   margin-top: 5rem;
-  background: #dddddd;
   padding-left: 1rem;
   padding-bottom: 2rem;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
 }
 
 main {
-  background: #b9ffa0;
   padding-top: 2rem;
 }
 
@@ -36,9 +38,10 @@ main {
 
   button {
     background: transparent;
-    border: none;
+    border: 0.1rem solid black;
     font-weight: 700;
     cursor: pointer;
+    padding: 0 0.3rem;
 
     &:hover {
       font-size: 1.5rem;
