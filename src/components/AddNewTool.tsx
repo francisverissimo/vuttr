@@ -1,20 +1,12 @@
 import { FormEvent, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faXmarkSquare } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/addNewTool.scss";
-
-type ToolsType = {
-  id: number;
-  title: string;
-  description: string;
-  link: string;
-  tags: string[];
-};
+import { refreshPage } from "../App";
 
 export function AddNewTool() {
-  const [id, setId] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [link, setLink] = useState<string>();
@@ -29,7 +21,6 @@ export function AddNewTool() {
     event.preventDefault();
 
     const formInputValues = {
-      id: id,
       title: title,
       description: description,
       link: link,
@@ -42,6 +33,8 @@ export function AddNewTool() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formInputValues)
       });
+
+      refreshPage();
     } catch (error) {
       console.error(error);
     }
@@ -49,14 +42,21 @@ export function AddNewTool() {
 
   return (
     <div id="overlayForm">
-      <div id="formAddNewTool" onMouseLeave={closeForm}>
-        <h3>
-          <FontAwesomeIcon icon={faPlus} /> Add new tool
-        </h3>
+      <div id="formAddNewTool">
+        <div id="headerForm">
+          <h3>
+            <FontAwesomeIcon icon={faPlus} /> Add new tool
+          </h3>
+          <div id="closeForm" onClick={() => closeForm()}>
+            <FontAwesomeIcon icon={faXmarkSquare} size="2x" />
+          </div>
+        </div>
+
         <form onSubmit={addNewToolToDb}>
           <label htmlFor="">Tool name</label>
           <input
             type="text"
+            required
             onChange={event => setTitle(event.target.value)}
             value={title}
           />
@@ -64,12 +64,14 @@ export function AddNewTool() {
           <label htmlFor="">Tool link</label>
           <input
             type="text"
+            required
             onChange={event => setLink(event.target.value)}
             value={link}
           />
 
           <label htmlFor="">Tool description</label>
           <textarea
+            required
             onChange={event => setDescription(event.target.value)}
             value={description}
           />
@@ -77,6 +79,7 @@ export function AddNewTool() {
           <label htmlFor="tags">Tags</label>
           <input
             type="text"
+            required
             onChange={event => setTags(event.target.value)}
             value={tags}
           />
