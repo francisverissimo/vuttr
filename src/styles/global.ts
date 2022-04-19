@@ -1,13 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-import SourceSansPro from "../assets/fonts/SourceSansPro-Regular.ttf";
-
 export default createGlobalStyle`
-  @font-face {
-    font-family: "Source Sans Pro";
-    src: url(${SourceSansPro});
-  }
-
   /* Prussian Blue Pallete */
     /* mainColorDark: #1a3c40; */
     /* mainColor: #1d5c63; */
