@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const OverlayForm = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
   z-index: 2;
   top: 0;
@@ -11,19 +11,15 @@ export const OverlayForm = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-
-  &.active {
-    opacity: 1;
-    visibility: visible;
-  }
+  opacity: 1;
+  visibility: visible;
 
   #formAddNewTool {
-    background: white;
-    padding: 1rem;
-    height: 50%;
-    width: 50%;
+    background: #ede6db;
+    padding: 2rem;
+    height: auto;
+    width: 62rem;
+    color: #1d5c63;
 
     #headerForm {
       display: flex;
@@ -31,6 +27,12 @@ export const OverlayForm = styled.div`
 
       #closeForm {
         cursor: pointer;
+        color: #ff0000aa;
+        transition: 0.2s;
+
+        :hover {
+          color: #ff0000;
+        }
       }
 
       h3 {
@@ -44,32 +46,43 @@ export const OverlayForm = styled.div`
       flex-direction: column;
     }
 
-    label,
-    input,
-    textarea,
-    button {
-      margin-left: 1rem;
-      margin-right: 1rem;
+    label {
+      color: #1d5c63;
+      margin-bottom: 0.2rem;
     }
 
     input {
       margin-bottom: 1rem;
       padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: none;
     }
 
     textarea {
       margin-bottom: 1rem;
       padding: 0.5rem;
-      max-width: 45rem;
-      max-height: 8rem;
-      margin-left: auto;
-      margin-right: auto;
+      width: 100%;
+      height: 7rem;
+      border-radius: 0.7rem;
+      border: none;
     }
 
     button {
       width: 10rem;
       padding: 1rem;
       margin-left: auto;
+      margin-top: 1rem;
+      background: #1d5c63dd;
+      color: #ede6db;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+
+      :hover {
+        background: #1d5c63;
+      }
     }
   }
 `;
