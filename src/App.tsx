@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { Tool } from "./components/Tool";
 import { AddNewTool } from "./components/AddNewTool";
 
-import "./styles/app.scss";
+import { SectionHeader, Main, SubHeader } from "./styles/app";
+import GlobalStyle from "./styles/global";
 
 type ToolsType = {
   id: number;
@@ -39,7 +40,7 @@ function App() {
     }
   }
 
-  async function getSeachTools(keywords: string) {
+  async function getSearchTools(keywords: string) {
     const inputCheckbox = document.querySelector("#seachTagsOnly");
 
     try {
@@ -67,13 +68,16 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>VUTTR</h1>
-        <h2>Very Usefull Tools to Remember</h2>
-      </header>
+      <GlobalStyle />
+      <SectionHeader>
+        <header>
+          <h1>VUTTR</h1>
+          <h2>Very Usefull Tools to Remember</h2>
+        </header>
+      </SectionHeader>
 
-      <main>
-        <section id="sectionSubHeader">
+      <Main>
+        <SubHeader>
           <div>
             <input type="text" name="inputSeach" id="inputSeach" />
             <input
@@ -84,14 +88,14 @@ function App() {
               value={inputSearch}
             />
             <label htmlFor="">search in tags only</label>
-            <button onClick={() => getSeachTools(inputSearch)}>
+            <button onClick={() => getSearchTools(inputSearch)}>
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
           <button onClick={openForm}>
             <FontAwesomeIcon icon={faPlus} /> Add
           </button>
-        </section>
+        </SubHeader>
 
         <section id="sectionTools">
           {tools?.map(tool => {
@@ -111,7 +115,7 @@ function App() {
         <section>
           <AddNewTool />
         </section>
-      </main>
+      </Main>
     </>
   );
 }

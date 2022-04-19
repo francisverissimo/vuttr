@@ -3,7 +3,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { refreshPage } from "../App";
 
-import "../styles/tool.scss";
+import { ToolCard } from "../styles/tool";
 
 type ToolsType = {
   id: number;
@@ -30,10 +30,7 @@ export function Tool(props: ToolsType) {
   }
 
   return (
-    <div
-      id="tool"
-      key={props.id}
-    >
+    <ToolCard key={props.id}>
       <div className="headerTool">
         <div className="title">{props.title}</div>
         <button onClick={() => deleteTool(props.id, props.title)}>
@@ -43,6 +40,6 @@ export function Tool(props: ToolsType) {
       <div className="link">{props.link}</div>
       <div className="description">{props.description}</div>
       <div className="tags">{props.tags}</div>
-    </div>
+    </ToolCard>
   );
 }

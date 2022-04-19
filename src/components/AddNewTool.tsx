@@ -3,8 +3,9 @@ import { FormEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faXmarkSquare } from "@fortawesome/free-solid-svg-icons";
 
-import "../styles/addNewTool.scss";
 import { refreshPage } from "../App";
+
+import { OverlayForm } from "../styles/addNewTool";
 
 export function AddNewTool() {
   const [title, setTitle] = useState<string>();
@@ -41,7 +42,7 @@ export function AddNewTool() {
   }
 
   return (
-    <div id="overlayForm">
+    <OverlayForm>
       <div id="formAddNewTool">
         <div id="headerForm">
           <h3>
@@ -87,6 +88,6 @@ export function AddNewTool() {
           <button type="submit">Add tool</button>
         </form>
       </div>
-    </div>
+    </OverlayForm>
   );
 }
