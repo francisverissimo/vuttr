@@ -10,8 +10,7 @@ export const SectionHeader = styled.section`
     margin-right: auto;
     padding: 5rem 1rem 2rem;
     color: #ede6db;
-    text-shadow: 0.4rem 0.4rem 0.5rem #1a3c40,
-      -0.4rem -0.4rem 0.5rem #1a3c40;
+    text-shadow: 0.4rem 0.4rem 0.5rem #1a3c40, -0.4rem -0.4rem 0.5rem #1a3c40;
 
     h1 {
       margin-bottom: 1rem;
@@ -44,16 +43,13 @@ export const SubHeader = styled.section`
       margin-right: 0.8rem;
     }
   }
+`;
 
-  button {
-    background: transparent;
-    border: 0.1rem solid black;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 0 0.3rem;
-
-    &:hover {
-      font-size: 1.5rem;
-    }
-  }
+export const ButtonOpenModalForm = styled.button`
+  background: transparent;
+  color: green;
+  border: none;
+  cursor: pointer;
+  padding: 0 0.3rem;
+  font-size: 2.5rem;
 `;
