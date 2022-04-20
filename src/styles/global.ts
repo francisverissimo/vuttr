@@ -20,7 +20,7 @@ export default createGlobalStyle`
   
   body {
     font-size: 1.6rem;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: "Montserrat", sans-serif;
     background: #ede6db;
   }
 `;
