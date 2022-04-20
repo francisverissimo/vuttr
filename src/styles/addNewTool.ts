@@ -5,14 +5,11 @@ export const OverlayForm = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  z-index: 2;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;
-  visibility: visible;
 
   #formAddNewTool {
     background: #ede6db;
@@ -56,15 +53,19 @@ export const OverlayForm = styled.div`
       padding: 0.5rem;
       border-radius: 0.5rem;
       border: none;
+      font-size: 2rem;
+      color: #444;
     }
 
     textarea {
       margin-bottom: 1rem;
       padding: 0.5rem;
       width: 100%;
-      height: 7rem;
+      height: 8rem;
       border-radius: 0.7rem;
       border: none;
+      font-size: 2rem;
+      color: #444;
     }
 
     button {
