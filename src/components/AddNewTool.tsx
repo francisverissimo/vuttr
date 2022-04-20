@@ -1,24 +1,33 @@
-import { FormEvent, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faXmarkSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { refreshPage } from "../App";
 
 import { OverlayForm } from "../styles/addNewTool";
 
-export function AddNewTool() {
-  const [title, setTitle] = useState<string>();
-  const [description, setDescription] = useState<string>();
-  const [link, setLink] = useState<string>();
-  const [tags, setTags] = useState<string>();
+type AddNewToolType = {
+  onClickCloseButton: () => void;
+  showModal: boolean;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-  function closeForm() {
-    const overlayForm = document.querySelector("#overlayForm");
-    overlayForm?.classList.remove("active");
-  }
+export function AddNewTool(props: AddNewToolType) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [tags, setTags] = useState("");
 
-  async function addNewToolToDb(event: FormEvent) {
+  const modalFormRef = useRef(null);
+
+  const closeModalForm = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (modalFormRef.current === e.target) {
+      props.setShowModal(false);
+    }
+  };
+
+  async function addNewToolToDb(event: React.FormEvent) {
     event.preventDefault();
 
     const formInputValues = {
@@ -42,18 +51,18 @@ export function AddNewTool() {
   }
 
   return (
-    <OverlayForm>
+    <OverlayForm ref={modalFormRef} onClick={e => closeModalForm(e)}>
       <div id="formAddNewTool">
         <div id="headerForm">
           <h3>
             <FontAwesomeIcon icon={faPlus} /> Add new tool
           </h3>
-          <div id="closeForm" onClick={() => closeForm()}>
-            <FontAwesomeIcon icon={faXmarkSquare} size="2x" />
+          <div id="closeForm" onClick={props.onClickCloseButton}>
+            <FontAwesomeIcon icon={faXmarkCircle} size="2x" />
           </div>
         </div>
 
-        <form onSubmit={addNewToolToDb}>
+        <form onSubmit={addNewToolToDb as any}>
           <label htmlFor="">Tool name</label>
           <input
             type="text"
