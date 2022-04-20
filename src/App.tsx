@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { Tool } from "./components/Tool";
 import { AddNewTool } from "./components/AddNewTool";
 
-import { SectionHeader, Main, SubHeader } from "./styles/app";
+import { SectionHeader, Main, SubHeader, ButtonOpenModalForm } from "./styles/app";
 import GlobalStyle from "./styles/global";
 
 type ToolsType = {
@@ -92,9 +92,9 @@ function App() {
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
-          <button onClick={openModalForm}>
-            <FontAwesomeIcon icon={faPlus} /> Add
-          </button>
+          <ButtonOpenModalForm>
+            <FontAwesomeIcon icon={faPlusCircle} onClick={openModalForm} />
+          </ButtonOpenModalForm>
         </SubHeader>
 
         <section id="sectionTools">
