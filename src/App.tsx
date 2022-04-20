@@ -22,12 +22,12 @@ export function refreshPage() {
 }
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
   const [tools, setTools] = useState<ToolsType[]>();
   const [inputSearch, setInputSearch] = useState("");
 
-  function openForm() {
-    const overlayForm = document.querySelector("#overlayForm");
-    overlayForm?.classList.add("active");
+  function openModalForm() {
+    setShowModal(e => !e);
   }
 
   async function getTools() {
@@ -92,7 +92,7 @@ function App() {
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </div>
-          <button onClick={openForm}>
+          <button onClick={openModalForm}>
             <FontAwesomeIcon icon={faPlus} /> Add
           </button>
         </SubHeader>
@@ -112,9 +112,15 @@ function App() {
           })}
         </section>
 
-        <section>
-          <AddNewTool />
-        </section>
+        <>
+          {showModal ? (
+            <AddNewTool
+              onClickCloseButton={() => setShowModal(prev => !prev)}
+              setShowModal={setShowModal}
+              showModal={showModal}
+            />
+          ) : null}
+        </>
       </Main>
     </>
   );
