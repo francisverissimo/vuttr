@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { refreshPage } from "../App";
-
 import { OverlayForm } from "../styles/addNewTool";
 
 type AddNewToolType = {
@@ -21,11 +20,26 @@ export function AddNewTool(props: AddNewToolType) {
 
   const modalFormRef = useRef(null);
 
-  const closeModalForm = (e: React.MouseEvent<HTMLDivElement>) => {
+  function closeModalForm(e: React.MouseEvent<HTMLDivElement>) {
     if (modalFormRef.current === e.target) {
       props.setShowModal(false);
     }
-  };
+  }
+
+  function treatTags(keyWords: string): string[] {
+    console.log(`SEM TRATAR: ${keyWords}`);
+
+    const treatedKeywords = keyWords
+      .trim()
+      .toLowerCase()
+      .replace(/([^\w]+|\s+)/g, " ")
+      .split(" ")
+      .filter(e => e !== "");
+
+    console.log(`TRATADA: ${treatedKeywords}`);
+
+    return treatedKeywords;
+  }
 
   async function addNewToolToDb(event: React.FormEvent) {
     event.preventDefault();
@@ -34,7 +48,7 @@ export function AddNewTool(props: AddNewToolType) {
       title: title,
       description: description,
       link: link,
-      tags: tags?.split(" ")
+      tags: treatTags(tags)
     };
 
     try {
@@ -44,7 +58,7 @@ export function AddNewTool(props: AddNewToolType) {
         body: JSON.stringify(formInputValues)
       });
 
-      refreshPage();
+      // refreshPage();
     } catch (error) {
       console.error(error);
     }
