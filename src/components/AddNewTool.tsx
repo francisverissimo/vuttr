@@ -26,29 +26,35 @@ export function AddNewTool(props: AddNewToolType) {
     }
   }
 
-  function treatTags(keyWords: string): string[] {
-    console.log(`SEM TRATAR: ${keyWords}`);
-
+  function handleTags(keyWords: string): string[] {
     const treatedKeywords = keyWords
       .trim()
       .toLowerCase()
+      .normalize("NFD")
       .replace(/([^\w]+|\s+)/g, " ")
       .split(" ")
       .filter(e => e !== "");
 
-    console.log(`TRATADA: ${treatedKeywords}`);
-
     return treatedKeywords;
+  }
+  
+  function handleTextInput(text: string) {
+    const treatedText = text
+      .trim()
+      .normalize("NFD")
+      .replace(/([^\w]+|\s+)/g, " ");
+
+    return treatedText;
   }
 
   async function addNewToolToDb(event: React.FormEvent) {
     event.preventDefault();
 
     const formInputValues = {
-      title: title,
-      description: description,
-      link: link,
-      tags: treatTags(tags)
+      title: handleTextInput(title),
+      description: handleTextInput(description),
+      link: handleTextInput(link),
+      tags: handleTags(tags)
     };
 
     try {
@@ -58,7 +64,7 @@ export function AddNewTool(props: AddNewToolType) {
         body: JSON.stringify(formInputValues)
       });
 
-      // refreshPage();
+      refreshPage();
     } catch (error) {
       console.error(error);
     }
@@ -76,7 +82,7 @@ export function AddNewTool(props: AddNewToolType) {
           </div>
         </div>
 
-        <form onSubmit={addNewToolToDb as any}>
+        <form onSubmit={addNewToolToDb}>
           <label htmlFor="">Tool name</label>
           <input
             type="text"
