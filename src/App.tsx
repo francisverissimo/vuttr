@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { Tool } from "./components/Tool";
 import { AddNewTool } from "./components/AddNewTool";
 
-import { SectionHeader, Main, SubHeader, ButtonOpenModalForm } from "./styles/app";
+import {
+  SectionHeader,
+  Main,
+  SubHeader,
+  ButtonOpenModalForm,
+  SearchInputs,
+  Checkbox
+} from "./styles/app";
 import GlobalStyle from "./styles/global";
 
 type ToolsType = {
@@ -78,20 +85,19 @@ function App() {
 
       <Main>
         <SubHeader>
-          <div>
-            <input type="text" name="inputSeach" id="inputSeach" />
-            <input
-              type="checkbox"
-              name="seachTagsOnly"
-              id="seachTagsOnly"
-              onChange={event => setInputSearch(event.target.value)}
-              value={inputSearch}
-            />
-            <label htmlFor="">search in tags only</label>
-            <button onClick={() => getSearchTools(inputSearch)}>
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-          </div>
+          <SearchInputs>
+            <Checkbox>
+              <input
+                type="checkbox"
+                name="seachTagsOnly"
+                id="seachTagsOnly"
+                onChange={event => setInputSearch(event.target.value)}
+                value={inputSearch}
+              />
+              <label htmlFor="">search in tags only</label>
+            </Checkbox>
+            <input type="text" name="inputTextSeach" id="inputTextSeach" />
+          </SearchInputs>
           <ButtonOpenModalForm>
             <FontAwesomeIcon icon={faPlusCircle} onClick={openModalForm} />
           </ButtonOpenModalForm>
