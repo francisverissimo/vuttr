@@ -3,6 +3,8 @@ import styled from "styled-components";
 /** Header */
 export const SectionHeader = styled.section`
   background: #1d5c63;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
 
   header {
     max-width: 65rem;
@@ -41,8 +43,8 @@ export const ButtonOpenModalForm = styled.button`
   border-radius: 10rem;
   position: absolute;
   right: 2rem;
-  top: -4rem;
-  font-size: 5rem;
+  top: -2rem;
+  font-size: 4rem;
   transition: 0.2s;
 
   :hover {
