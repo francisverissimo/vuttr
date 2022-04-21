@@ -32,12 +32,13 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [tools, setTools] = useState<ToolsType[]>();
   const [inputSearch, setInputSearch] = useState("");
+  const [searchTagsOnly, setSearchTagsOnly] = useState(false);
 
   function openModalForm() {
     setShowModal(e => !e);
   }
 
-  async function getTools() {
+  async function getAllTools() {
     try {
       const response = await fetch("http://localhost:3000/tools");
       const data = await response.json();
@@ -48,30 +49,39 @@ function App() {
   }
 
   async function getSearchTools(keywords: string) {
-    const inputCheckbox = document.querySelector("#seachTagsOnly");
-
-    try {
-      if (inputSearch.trim() !== "" && inputCheckbox?.ariaChecked) {
+    if (inputSearch.trim() !== "" && searchTagsOnly) {
+      try {
         const response = await fetch(
           `http://localhost:3000/tools?tags_like=${keywords}`
         );
         const data = await response.json();
+        // console.log(data);
         setTools(data);
-      } else if (inputSearch.trim() !== "") {
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // pesquisa geral
+    if (inputSearch.trim() !== "" && !searchTagsOnly) {
+      try {
         const response = await fetch(
           `http://localhost:3000/tools?q=${keywords}`
         );
         const data = await response.json();
+        // console.log(data);
         setTools(data);
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   }
 
   useEffect(() => {
-    getTools();
-  }, []);
+    if (inputSearch === "") getAllTools();
+
+    if (inputSearch !== "") getSearchTools(inputSearch);
+  }, [inputSearch]);
 
   return (
     <>
@@ -91,12 +101,22 @@ function App() {
                 type="checkbox"
                 name="seachTagsOnly"
                 id="seachTagsOnly"
-                onChange={event => setInputSearch(event.target.value)}
-                value={inputSearch}
+                checked={searchTagsOnly}
+                onChange={e => {
+                  setSearchTagsOnly(e.target.checked);
+                }}
               />
-              <label htmlFor="">search in tags only</label>
+              <label htmlFor="seachTagsOnly">search in tags only</label>
             </Checkbox>
-            <input type="text" name="inputTextSeach" id="inputTextSeach" />
+            <input
+              type="text"
+              name="inputTextSeach"
+              id="inputTextSeach"
+              onChange={e => {
+                setInputSearch(e.target.value);
+              }}
+              value={inputSearch}
+            />
           </SearchInputs>
           <ButtonOpenModalForm>
             <FontAwesomeIcon icon={faPlusCircle} onClick={openModalForm} />
