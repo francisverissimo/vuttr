@@ -23,33 +23,56 @@ export const Main = styled.main`
   max-width: 65rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 2rem;
 `;
 
 /** SubHeader */
 export const SubHeader = styled.section`
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 2rem;
-  display: flex;
+  padding: 1rem;
   align-items: center;
-  justify-content: space-between;
-
-  div {
-    display: flex;
-    align-items: center;
-
-    * {
-      margin-right: 0.8rem;
-    }
-  }
+  position: relative;
 `;
 
 export const ButtonOpenModalForm = styled.button`
-  background: transparent;
-  color: green;
+  background: #ede6db;
+  color: #54e346bb;
   border: none;
   cursor: pointer;
-  padding: 0 0.3rem;
-  font-size: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 10rem;
+  position: absolute;
+  right: 2rem;
+  top: -4rem;
+  font-size: 5rem;
+  transition: 0.2s;
+
+  :hover {
+    color: #54e346;
+  }
+`;
+
+export const SearchInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  input {
+    border: none;
+    border-radius: 1rem;
+    height: 2.5rem;
+    padding: 1rem;
+    font-size: 2rem;
+    color: #333;
+  }
+`;
+
+export const Checkbox = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+
+  input {
+    margin-right: 1rem;
+    width: 1.75rem;
+  }
 `;
