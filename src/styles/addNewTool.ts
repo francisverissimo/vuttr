@@ -17,6 +17,7 @@ export const OverlayForm = styled.div`
     height: auto;
     width: 62rem;
     color: #1d5c63;
+    border-radius: 2rem;
 
     #headerForm {
       display: flex;
