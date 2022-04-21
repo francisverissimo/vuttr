@@ -11,7 +11,7 @@ export const ToolCard = styled.div`
   .headerTool {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1rem;
+    align-items: center;
 
     .title {
       font-size: 2rem;
