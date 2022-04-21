@@ -5,7 +5,8 @@ export const ToolCard = styled.div`
   margin-bottom: 2rem;
   margin-left: 1rem;
   margin-right: 1rem;
-  border: 0.15rem solid black;
+  border-radius: 1rem;
+  box-shadow: 0.3rem 0.3rem 1rem #bbb, -0.3rem -0.3rem 1rem #bbb;
 
   .headerTool {
     display: flex;
@@ -14,39 +15,43 @@ export const ToolCard = styled.div`
 
     .title {
       font-size: 2rem;
-      color: #2f55cc;
-      font-weight: 500;
-      text-decoration: underline;
-    }
-
-    button {
-      border: none;
-      background: transparent;
-      font-size: 1.6rem;
+      color: #1d5c63;;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-
-      &:hover {
-        font-size: 1.7rem;
-      }
-
-      svg {
-        margin-right: 0.5rem;
-      }
     }
   }
 
   .link {
+    color: #222;
     margin-bottom: 1rem;
   }
 
   .description {
+    color: #222;
     margin-bottom: 1rem;
   }
 
   .tags {
+    color: #222;
     font-weight: 700;
+  }
+`;
+
+export const ButtonRemoveTool = styled.button`
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #ff0000bb;
+  transition: 0.2s;
+
+  &:hover {
+    color: #ff0000;
+  }
+
+  svg {
+    margin: 1rem 2rem;
   }
 `;
