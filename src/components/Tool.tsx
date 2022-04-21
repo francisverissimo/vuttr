@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { refreshPage } from "../App";
 
-import { ToolCard } from "../styles/tool";
+import { ButtonRemoveTool, ToolCard } from "../styles/tool";
 
 type ToolsType = {
   id: number;
@@ -33,9 +33,9 @@ export function Tool(props: ToolsType) {
     <ToolCard key={props.id}>
       <div className="headerTool">
         <div className="title">{props.title}</div>
-        <button onClick={() => deleteTool(props.id, props.title)}>
-          <FontAwesomeIcon icon={faXmark} /> remove
-        </button>
+        <ButtonRemoveTool onClick={() => deleteTool(props.id, props.title)}>
+          <FontAwesomeIcon icon={faTrash} />
+        </ButtonRemoveTool>
       </div>
       <div className="link">{props.link}</div>
       <div className="description">{props.description}</div>
