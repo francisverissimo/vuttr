@@ -15,6 +15,7 @@ import {
   Checkbox
 } from "./styles/app";
 import GlobalStyle from "./styles/global";
+import { SearchNoResult } from "./components/SearchNoResults";
 
 type ToolsType = {
   id: number;
@@ -30,7 +31,7 @@ export function refreshPage() {
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [tools, setTools] = useState<ToolsType[]>();
+  const [tools, setTools] = useState<ToolsType[]>([]);
   const [inputSearch, setInputSearch] = useState("");
   const [searchTagsOnly, setSearchTagsOnly] = useState(false);
 
@@ -112,6 +113,7 @@ function App() {
               type="text"
               name="inputTextSeach"
               id="inputTextSeach"
+              maxLength={25}
               onChange={e => {
                 setInputSearch(e.target.value);
               }}
@@ -124,18 +126,20 @@ function App() {
         </SubHeader>
 
         <section id="sectionTools">
-          {tools?.map(tool => {
-            return (
-              <Tool
-                key={tool.id}
-                id={tool.id}
-                title={tool.title}
-                description={tool.description}
-                link={tool.link}
-                tags={tool.tags.map(tag => `#${tag} `)}
-              />
-            );
-          })}
+          {tools.length > 0 ? (
+            tools.map(tool => {
+              return (
+                <Tool
+                  key={tool.id}
+                  id={tool.id}
+                  title={tool.title}
+                  description={tool.description}
+                  link={tool.link}
+                  tags={tool.tags.map(tag => `#${tag} `)}
+                />
+              );
+            })
+          ) : <SearchNoResult keyWords={inputSearch} /> }
         </section>
 
         <>
