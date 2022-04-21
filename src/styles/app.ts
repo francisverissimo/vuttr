@@ -63,6 +63,8 @@ export const SearchInputs = styled.div`
     padding: 1rem;
     font-size: 2rem;
     color: #333;
+    text-align: center;
+    max-width: 30rem;
   }
 `;
 
