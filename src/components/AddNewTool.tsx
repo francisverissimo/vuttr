@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +20,22 @@ export function AddNewTool(props: AddNewToolType) {
 
   const modalFormRef = useRef(null);
 
+  const keypress = useCallback(
+    e => {
+      if (e.key === "Escape") {
+        props.setShowModal(false);
+        console.log("Pres ESC");
+      }
+    },
+    [props.setShowModal, props.showModal]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", keypress);
+
+    return () => document.removeEventListener("keydown", keypress);
+  }, [keypress]);
+
   function closeModalForm(e: React.MouseEvent<HTMLDivElement>) {
     if (modalFormRef.current === e.target) {
       props.setShowModal(false);
@@ -37,7 +53,7 @@ export function AddNewTool(props: AddNewToolType) {
 
     return treatedKeywords;
   }
-  
+
   function handleTextInput(text: string) {
     const treatedText = text
       .trim()

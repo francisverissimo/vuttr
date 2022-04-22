@@ -1,7 +1,7 @@
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { OverlayModal } from "../styles/removeToolModal";
 
@@ -16,6 +16,22 @@ type RemoveToolModalType = {
 
 export function RemoveToolModal(props: RemoveToolModalType) {
   const modalFormRef = useRef(null);
+
+  const keypress = useCallback(
+    e => {
+      if (e.key === "Escape") {
+        props.setShowModalRemove(false);
+        console.log("Pres ESC");
+      }
+    },
+    [props.setShowModalRemove, props.showModalRemove]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", keypress);
+
+    return () => document.removeEventListener("keydown", keypress);
+  }, [keypress]);
 
   function closeModalForm(e: React.MouseEvent<HTMLDivElement>) {
     if (modalFormRef.current === e.target) {
