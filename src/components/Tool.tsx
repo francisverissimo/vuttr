@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { refreshPage } from "../App";
 
+import { RemoveToolModal } from "./RemoveToolModal";
 import { ButtonRemoveTool, ToolCard } from "../styles/tool";
 
 type ToolsType = {
@@ -14,18 +17,22 @@ type ToolsType = {
 };
 
 export function Tool(props: ToolsType) {
-  async function deleteTool(toolId: number, toolTitle: string) {
-    if (window.confirm(`Are you sure you want to remove ${toolTitle}`)) {
-      try {
-        await fetch(`http://localhost:3000/tools/${toolId}`, {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" }
-        });
+  const [showModalRemove, setShowModalRemove] = useState(false);
 
-        refreshPage();
-      } catch (error) {
-        console.error(error);
-      }
+  function openModalRemove() {
+    setShowModalRemove(e => !e);
+  }
+
+  async function deleteTool(toolId: number) {
+    try {
+      await fetch(`http://localhost:3000/tools/${toolId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      });
+
+      refreshPage();
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -33,13 +40,24 @@ export function Tool(props: ToolsType) {
     <ToolCard key={props.id}>
       <div className="headerTool">
         <div className="title">{props.title}</div>
-        <ButtonRemoveTool onClick={() => deleteTool(props.id, props.title)}>
+        <ButtonRemoveTool onClick={openModalRemove}>
           <FontAwesomeIcon icon={faTrash} />
         </ButtonRemoveTool>
       </div>
       <div className="link">{props.link}</div>
       <div className="description">{props.description}</div>
       <div className="tags">{props.tags}</div>
+
+      {showModalRemove ? (
+        <RemoveToolModal
+          closeModalRemove={() => setShowModalRemove(e => !e)}
+          setShowModalRemove={setShowModalRemove}
+          showModalRemove={showModalRemove}
+          toolId={props.id}
+          toolTitle={props.title}
+          deleteTool={() => deleteTool(props.id)}
+        />
+      ) : null}
     </ToolCard>
   );
 }
