@@ -1,10 +1,10 @@
 import { useState } from "react";
-
+import { animated, useTransition } from "react-spring";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { refreshPage } from "../App";
-
 import { RemoveToolModal } from "./RemoveToolModal";
 import { ButtonRemoveTool, ToolCard } from "../styles/tool";
 
@@ -18,6 +18,13 @@ type ToolsType = {
 
 export function Tool(props: ToolsType) {
   const [showModalRemove, setShowModalRemove] = useState(false);
+
+  const transtion = useTransition(showModalRemove, {
+    config: { duration: 250 },
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  });
 
   function openModalRemove() {
     setShowModalRemove(e => !e);
@@ -48,16 +55,20 @@ export function Tool(props: ToolsType) {
       <div className="description">{props.description}</div>
       <div className="tags">{props.tags}</div>
 
-      {showModalRemove ? (
-        <RemoveToolModal
-          closeModalRemove={() => setShowModalRemove(e => !e)}
-          setShowModalRemove={setShowModalRemove}
-          showModalRemove={showModalRemove}
-          toolId={props.id}
-          toolTitle={props.title}
-          deleteTool={() => deleteTool(props.id)}
-        />
-      ) : null}
+      {transtion((style, item) =>
+        item ? (
+          <animated.div style={style}>
+            <RemoveToolModal
+              closeModalRemove={() => setShowModalRemove(e => !e)}
+              setShowModalRemove={setShowModalRemove}
+              showModalRemove={showModalRemove}
+              toolId={props.id}
+              toolTitle={props.title}
+              deleteTool={() => deleteTool(props.id)}
+            />
+          </animated.div>
+        ) : null
+      )}
     </ToolCard>
   );
 }

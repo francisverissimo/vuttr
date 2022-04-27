@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-
+import { animated, useTransition } from "react-spring";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { Tool } from "./components/Tool";
@@ -35,6 +36,13 @@ function App() {
   const [inputSearch, setInputSearch] = useState("");
   const [searchTagsOnly, setSearchTagsOnly] = useState(false);
 
+  const transtion = useTransition(showModal, {
+    config: { duration: 250 },
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0}
+  });
+
   function openModalForm() {
     setShowModal(e => !e);
   }
@@ -56,21 +64,18 @@ function App() {
           `http://localhost:3000/tools?tags_like=${keywords}`
         );
         const data = await response.json();
-        // console.log(data);
         setTools(data);
       } catch (error) {
         console.error(error);
       }
     }
 
-    // pesquisa geral
     if (inputSearch.trim() !== "" && !searchTagsOnly) {
       try {
         const response = await fetch(
           `http://localhost:3000/tools?q=${keywords}`
         );
         const data = await response.json();
-        // console.log(data);
         setTools(data);
       } catch (error) {
         console.error(error);
@@ -93,7 +98,6 @@ function App() {
           <h2>Very Usefull Tools to Remember</h2>
         </header>
       </SectionHeader>
-
       <Main>
         <SubHeader>
           <SearchInputs>
@@ -125,6 +129,18 @@ function App() {
           </ButtonOpenModalForm>
         </SubHeader>
 
+        {transtion((style, item) =>
+          item ? (
+            <animated.div style={style}>
+              <AddNewTool
+                onClickCloseButton={() => setShowModal(prev => !prev)}
+                setShowModal={setShowModal}
+                showModal={showModal}
+              />
+            </animated.div>
+          ) : null
+        )}
+
         <section id="sectionTools">
           {tools.length > 0 ? (
             tools.map(tool => {
@@ -139,18 +155,10 @@ function App() {
                 />
               );
             })
-          ) : <SearchNoResult keyWords={inputSearch} /> }
+          ) : (
+            <SearchNoResult keyWords={inputSearch} />
+          )}
         </section>
-
-        <>
-          {showModal ? (
-            <AddNewTool
-              onClickCloseButton={() => setShowModal(prev => !prev)}
-              setShowModal={setShowModal}
-              showModal={showModal}
-            />
-          ) : null}
-        </>
       </Main>
     </>
   );
