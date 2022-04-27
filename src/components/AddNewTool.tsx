@@ -21,12 +21,7 @@ export function AddNewTool(props: AddNewToolType) {
   const modalFormRef = useRef(null);
 
   const keypress = useCallback(
-    e => {
-      if (e.key === "Escape") {
-        props.setShowModal(false);
-        console.log("Pres ESC");
-      }
-    },
+    e => e.key === "Escape" && props.setShowModal(false),
     [props.setShowModal, props.showModal]
   );
 
