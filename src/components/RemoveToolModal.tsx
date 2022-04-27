@@ -18,18 +18,12 @@ export function RemoveToolModal(props: RemoveToolModalType) {
   const modalFormRef = useRef(null);
 
   const keypress = useCallback(
-    e => {
-      if (e.key === "Escape") {
-        props.setShowModalRemove(false);
-        console.log("Pres ESC");
-      }
-    },
+    e => e.key === "Escape" && props.setShowModalRemove(false),
     [props.setShowModalRemove, props.showModalRemove]
   );
 
   useEffect(() => {
     document.addEventListener("keydown", keypress);
-
     return () => document.removeEventListener("keydown", keypress);
   }, [keypress]);
 
@@ -50,7 +44,8 @@ export function RemoveToolModal(props: RemoveToolModalType) {
           />
         </div>
         <p>
-          Are you sure you want to remove tool <span>{props.toolTitle}</span> ?
+          Are you sure you want to remove tool
+          <span> {props.toolTitle}</span>?
         </p>
         <div className="buttons">
           <button id="cancelButton" onClick={props.closeModalRemove}>
