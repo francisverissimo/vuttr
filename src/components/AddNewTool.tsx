@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 
-import { refreshPage } from "../App";
 import { OverlayForm } from "../styles/addNewTool";
 
 type AddNewToolType = {
@@ -74,8 +73,6 @@ export function AddNewTool(props: AddNewToolType) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formInputValues)
       });
-
-      refreshPage();
     } catch (error) {
       console.error(error);
     }

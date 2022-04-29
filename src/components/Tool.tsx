@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import { refreshPage } from "../App";
 import { RemoveToolModal } from "./RemoveToolModal";
 import { ButtonRemoveTool, ToolCard } from "../styles/tool";
 
@@ -18,7 +17,6 @@ type ToolsType = {
 
 export function Tool(props: ToolsType) {
   const [showModalRemove, setShowModalRemove] = useState(false);
-
   const transtion = useTransition(showModalRemove, {
     config: { duration: 250 },
     from: { opacity: 0 },
@@ -37,7 +35,6 @@ export function Tool(props: ToolsType) {
         headers: { "Content-Type": "application/json" }
       });
 
-      refreshPage();
     } catch (error) {
       console.error(error);
     }
