@@ -9,6 +9,7 @@ type AddNewToolType = {
   onClickCloseButton: () => void;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  getAllTools: () => void;
 };
 
 export function AddNewTool(props: AddNewToolType) {
@@ -73,6 +74,9 @@ export function AddNewTool(props: AddNewToolType) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formInputValues)
       });
+
+      props.setShowModal(false);
+      props.getAllTools();
     } catch (error) {
       console.error(error);
     }

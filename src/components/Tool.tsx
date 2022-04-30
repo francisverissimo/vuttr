@@ -13,6 +13,7 @@ type ToolsType = {
   description: string;
   link: string;
   tags: string[];
+  getAllTools: () => void;
 };
 
 export function Tool(props: ToolsType) {
@@ -35,6 +36,8 @@ export function Tool(props: ToolsType) {
         headers: { "Content-Type": "application/json" }
       });
 
+      setShowModalRemove(false);
+      props.getAllTools();
     } catch (error) {
       console.error(error);
     }
