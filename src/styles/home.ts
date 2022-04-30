@@ -80,3 +80,34 @@ export const Checkbox = styled.div`
     width: 1.75rem;
   }
 `;
+
+export const Footer = styled.div`
+  background: #777;
+  padding: 2rem;
+  margin-top: 5rem;
+
+  section {
+    max-width: 65rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+
+    p {
+      text-align: center;
+      color: #ede6db;
+      text-shadow: 0.2rem 0.2rem 0.3rem #333, -0.2rem -0.2rem 0.3rem #333;
+
+      :first-child {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      :last-child {
+        font-weight: 500;
+        margin-top: 1rem;
+      }
+    }
+  }
+`;

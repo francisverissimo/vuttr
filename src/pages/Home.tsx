@@ -15,7 +15,8 @@ import {
   SubHeader,
   ButtonOpenModalForm,
   SearchInputs,
-  Checkbox
+  Checkbox,
+  Footer
 } from "../styles/home";
 import GlobalStyle from "../styles/global";
 
@@ -125,7 +126,11 @@ export function Home() {
                   name="inputTextSeach"
                   id="inputTextSeach"
                   maxLength={25}
-                  placeholder={searchTagsOnly ? `Pesquisa por tags...` : `Pesquisa geral...`}
+                  placeholder={
+                    searchTagsOnly
+                      ? `Pesquisa por tags...`
+                      : `Pesquisa geral...`
+                  }
                   onChange={e => {
                     setInputSearch(e.target.value);
                   }}
@@ -173,6 +178,13 @@ export function Home() {
           </>
         )}
       </Main>
+      <Footer>
+        <section>
+          <p>VUTTR</p>
+          <p>Very Usefull Tools to Remember</p>
+          <p>2022 &copy; Francis S. Verissimo</p>
+        </section>
+      </Footer>
     </>
   );
 }
