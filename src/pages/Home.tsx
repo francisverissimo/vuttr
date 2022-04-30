@@ -125,6 +125,7 @@ export function Home() {
                   name="inputTextSeach"
                   id="inputTextSeach"
                   maxLength={25}
+                  placeholder={searchTagsOnly ? `Pesquisa por tags...` : `Pesquisa geral...`}
                   onChange={e => {
                     setInputSearch(e.target.value);
                   }}
