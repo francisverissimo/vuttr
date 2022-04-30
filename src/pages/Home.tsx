@@ -143,6 +143,7 @@ export function Home() {
                     onClickCloseButton={() => setShowModal(prev => !prev)}
                     setShowModal={setShowModal}
                     showModal={showModal}
+                    getAllTools={getAllTools}
                   />
                 </animated.div>
               ) : null
@@ -160,6 +161,7 @@ export function Home() {
                       description={tool.description}
                       link={tool.link}
                       tags={tool.tags.map(tag => `#${tag} `)}
+                      getAllTools={getAllTools}
                     />
                   );
                 })}
