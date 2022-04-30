@@ -58,6 +58,13 @@ export function AddNewTool(props: AddNewToolType) {
     return treatedText;
   }
 
+  function scrollDownPage() {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth"
+    });
+  }
+
   async function addNewToolToDb(event: React.FormEvent) {
     event.preventDefault();
 
@@ -80,6 +87,8 @@ export function AddNewTool(props: AddNewToolType) {
     } catch (error) {
       console.error(error);
     }
+
+    scrollDownPage();
   }
 
   return (
