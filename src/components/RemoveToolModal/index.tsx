@@ -1,9 +1,6 @@
-import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { X } from "phosphor-react";
 import { useCallback, useEffect, useRef } from "react";
-
-import { OverlayModal } from "../styles/removeToolModal";
+import { OverlayModal } from "./styles";
 
 type RemoveToolModalType = {
   closeModalRemove: () => void;
@@ -18,7 +15,7 @@ export function RemoveToolModal(props: RemoveToolModalType) {
   const modalFormRef = useRef(null);
 
   const keypress = useCallback(
-    e => e.key === "Escape" && props.setShowModalRemove(false),
+    (e: KeyboardEvent) => e.key === "Escape" && props.setShowModalRemove(false),
     [props.setShowModalRemove, props.showModalRemove]
   );
 
@@ -36,12 +33,8 @@ export function RemoveToolModal(props: RemoveToolModalType) {
   return (
     <OverlayModal ref={modalFormRef} onClick={closeModalForm}>
       <div id="modal">
-        <div id="closeForm">
-          <FontAwesomeIcon
-            icon={faXmarkCircle}
-            size="2x"
-            onClick={props.closeModalRemove}
-          />
+        <div id="closeForm" onClick={props.closeModalRemove}>
+          <X size={32} />
         </div>
         <p>
           Are you sure you want to remove tool

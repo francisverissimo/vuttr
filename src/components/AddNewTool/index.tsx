@@ -1,15 +1,12 @@
+import { X } from "phosphor-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-
-import { OverlayForm } from "../styles/addNewTool";
+import { OverlayForm } from "./styles";
 
 type AddNewToolType = {
   onClickCloseButton: () => void;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  getAllTools: () => void;
+  // getAllTools: () => void;
 };
 
 export function AddNewTool(props: AddNewToolType) {
@@ -21,7 +18,7 @@ export function AddNewTool(props: AddNewToolType) {
   const modalFormRef = useRef(null);
 
   const keypress = useCallback(
-    e => e.key === "Escape" && props.setShowModal(false),
+    (e: KeyboardEvent) => e.key === "Escape" && props.setShowModal(false),
     [props.setShowModal, props.showModal]
   );
 
@@ -44,7 +41,7 @@ export function AddNewTool(props: AddNewToolType) {
       .normalize("NFD")
       .replace(/([^\w]+|\s+)/g, " ")
       .split(" ")
-      .filter(e => e !== "");
+      .filter((e) => e !== "");
 
     return treatedKeywords;
   }
@@ -61,7 +58,7 @@ export function AddNewTool(props: AddNewToolType) {
   function scrollDownPage() {
     window.scrollTo({
       top: document.body.scrollHeight,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   }
 
@@ -72,18 +69,18 @@ export function AddNewTool(props: AddNewToolType) {
       title: handleTextInput(title),
       description: handleTextInput(description),
       link: handleTextInput(link),
-      tags: handleTags(tags)
+      tags: handleTags(tags),
     };
 
     try {
       await fetch("http://localhost:3000/tools", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formInputValues)
+        body: JSON.stringify(formInputValues),
       });
 
       props.setShowModal(false);
-      props.getAllTools();
+      // props.getAllTools();
     } catch (error) {
       console.error(error);
     }
@@ -92,14 +89,12 @@ export function AddNewTool(props: AddNewToolType) {
   }
 
   return (
-    <OverlayForm ref={modalFormRef} onClick={e => closeModalForm(e)}>
+    <OverlayForm ref={modalFormRef} onClick={(e) => closeModalForm(e)}>
       <div id="formAddNewTool">
         <div id="headerForm">
-          <h3>
-            <FontAwesomeIcon icon={faPlus} /> Add new tool
-          </h3>
+          <h3>Add new tool</h3>
           <div id="closeForm" onClick={props.onClickCloseButton}>
-            <FontAwesomeIcon icon={faXmarkCircle} size="2x" />
+            <X size={32} />
           </div>
         </div>
 
@@ -108,7 +103,7 @@ export function AddNewTool(props: AddNewToolType) {
           <input
             type="text"
             required
-            onChange={event => setTitle(event.target.value)}
+            onChange={(event) => setTitle(event.target.value)}
             value={title}
           />
 
@@ -116,14 +111,14 @@ export function AddNewTool(props: AddNewToolType) {
           <input
             type="text"
             required
-            onChange={event => setLink(event.target.value)}
+            onChange={(event) => setLink(event.target.value)}
             value={link}
           />
 
           <label htmlFor="">Tool description</label>
           <textarea
             required
-            onChange={event => setDescription(event.target.value)}
+            onChange={(event) => setDescription(event.target.value)}
             value={description}
           />
 
@@ -131,7 +126,7 @@ export function AddNewTool(props: AddNewToolType) {
           <input
             type="text"
             required
-            onChange={event => setTags(event.target.value)}
+            onChange={(event) => setTags(event.target.value)}
             value={tags}
           />
 

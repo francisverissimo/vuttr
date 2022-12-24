@@ -1,11 +1,8 @@
+import { TrashSimple } from "phosphor-react";
 import { useState } from "react";
 import { animated, useTransition } from "react-spring";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
-import { RemoveToolModal } from "./RemoveToolModal";
-import { ButtonRemoveTool, ToolCard } from "../styles/tool";
+import { RemoveToolModal } from "../RemoveToolModal";
+import { ButtonRemoveTool, ToolCard } from "./styles";
 
 type ToolsType = {
   id: number;
@@ -13,7 +10,7 @@ type ToolsType = {
   description: string;
   link: string;
   tags: string[];
-  getAllTools: () => void;
+  // getAllTools: () => void;
 };
 
 export function Tool(props: ToolsType) {
@@ -22,22 +19,22 @@ export function Tool(props: ToolsType) {
     config: { duration: 250 },
     from: { opacity: 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    leave: { opacity: 0 },
   });
 
   function openModalRemove() {
-    setShowModalRemove(e => !e);
+    setShowModalRemove((e) => !e);
   }
 
   async function deleteTool(toolId: number) {
     try {
       await fetch(`http://localhost:3000/tools/${toolId}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
       });
 
       setShowModalRemove(false);
-      props.getAllTools();
+      // props.getAllTools();
     } catch (error) {
       console.error(error);
     }
@@ -48,10 +45,10 @@ export function Tool(props: ToolsType) {
       <div className="headerTool">
         <div className="title">{props.title}</div>
         <ButtonRemoveTool onClick={openModalRemove}>
-          <FontAwesomeIcon icon={faTrash} />
+          <TrashSimple />
         </ButtonRemoveTool>
       </div>
-      <div className="link">{props.link}</div>
+      <div className="link">{props.link.substring(8)}</div>
       <div className="description">{props.description}</div>
       <div className="tags">{props.tags}</div>
 
@@ -59,7 +56,7 @@ export function Tool(props: ToolsType) {
         item ? (
           <animated.div style={style}>
             <RemoveToolModal
-              closeModalRemove={() => setShowModalRemove(e => !e)}
+              closeModalRemove={() => setShowModalRemove((e) => !e)}
               setShowModalRemove={setShowModalRemove}
               showModalRemove={showModalRemove}
               toolId={props.id}

@@ -1,12 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  /* Prussian Blue Pallete */
-    /* mainColorDark: #1a3c40; */
-    /* mainColor: #1d5c63; */
-    /* mainColorLight: #417d7a; */
-    /* colorLight: #ede6db; */
-
   * {
     margin: 0;
     padding: 0;
@@ -22,5 +16,6 @@ export default createGlobalStyle`
     font-size: 1.6rem;
     font-family: "Montserrat", sans-serif;
     background: #ede6db;
+    min-height: 100vh;
   }
 `;
