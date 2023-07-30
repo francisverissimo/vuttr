@@ -16,14 +16,14 @@ export const ContentLoading = styled.div`
     align-self: flex-end;
 
     .circle {
-      color: ${(props) => props.theme.mainColorLight};
+      color: ${(props) => props.theme.colorLight};
       font-size: 2rem;
       animation: ping 500ms cubic-bezier(0, 0, 0.2, 1) infinite;
     }
   }
 
   .circle-dashed {
-    color: ${(props) => props.theme.mainColorLight};
+    color: ${(props) => props.theme.colorLight};
     font-size: 10rem;
     animation: rotating 1600ms linear infinite;
   }

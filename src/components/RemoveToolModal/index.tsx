@@ -1,10 +1,10 @@
-import { X } from "phosphor-react";
 import { useCallback, useEffect, useRef } from "react";
+import { X } from "phosphor-react";
 import { OverlayModal } from "./styles";
+import { useTools } from "../../hooks/useTools";
 
 type RemoveToolModalType = {
   closeModalRemove: () => void;
-  deleteTool: (toolId: number) => void;
   showModalRemove: boolean;
   setShowModalRemove: React.Dispatch<React.SetStateAction<boolean>>;
   toolId: number;
@@ -12,11 +12,13 @@ type RemoveToolModalType = {
 };
 
 export function RemoveToolModal(props: RemoveToolModalType) {
+  const { closeModalRemove, setShowModalRemove, showModalRemove, toolId, toolTitle } = props;
   const modalFormRef = useRef(null);
+  const { removeTool } = useTools();
 
   const keypress = useCallback(
-    (e: KeyboardEvent) => e.key === "Escape" && props.setShowModalRemove(false),
-    [props.setShowModalRemove, props.showModalRemove]
+    (e: KeyboardEvent) => e.key === "Escape" && setShowModalRemove(false),
+    [setShowModalRemove, showModalRemove]
   );
 
   useEffect(() => {
@@ -26,29 +28,29 @@ export function RemoveToolModal(props: RemoveToolModalType) {
 
   function closeModalForm(e: React.MouseEvent<HTMLDivElement>) {
     if (modalFormRef.current === e.target) {
-      props.setShowModalRemove(false);
+      setShowModalRemove(false);
     }
   }
 
   return (
     <OverlayModal ref={modalFormRef} onClick={closeModalForm}>
       <div id="modal">
-        <div id="closeForm" onClick={props.closeModalRemove}>
+        <div id="closeForm" onClick={closeModalRemove}>
           <X size={32} />
         </div>
+
         <p>
           Are you sure you want to remove tool
-          <span> {props.toolTitle}</span>?
+          <span> {toolTitle}</span>?
         </p>
+
         <div className="buttons">
-          <button id="cancelButton" onClick={props.closeModalRemove}>
-            Cancel
+          <button id="cancelButton" onClick={closeModalRemove}>
+            CANCEL
           </button>
-          <button
-            id="removeButton"
-            onClick={() => props.deleteTool(props.toolId)}
-          >
-            Remove
+
+          <button id="removeButton" onClick={() => removeTool(toolId)}>
+            REMOVE
           </button>
         </div>
       </div>

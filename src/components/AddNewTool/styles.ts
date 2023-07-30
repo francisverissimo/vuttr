@@ -13,7 +13,7 @@ export const OverlayForm = styled.div`
   justify-content: center;
 
   #formAddNewTool {
-    background: ${props => props.theme.colorLight};
+    background-color: ${props => props.theme.colorLight};
     padding: 1.6rem;
     height: auto;
     width: 62rem;

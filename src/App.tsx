@@ -1,6 +1,10 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToolsContextProvider } from "./context/ToolsContext";
 import { Home } from "./pages/Home";
 
 export function App() {
-  return <Home />;
+  return (
+    <ToolsContextProvider>
+      <Home />;
+    </ToolsContextProvider>
+  );
 }

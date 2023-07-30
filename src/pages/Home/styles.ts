@@ -7,7 +7,7 @@ export const SectionHeader = styled.section`
   header {
     max-width: 65rem;
     margin-inline: auto;
-    padding: 1.6rem;
+    padding: 3.2rem 1.6rem;
     color: ${(props) => props.theme.colorLight};
 
     h1 {
@@ -19,14 +19,16 @@ export const SectionHeader = styled.section`
 /** Main */
 export const Main = styled.main`
   max-width: 65rem;
+  width: 100%;
   padding-inline: 1.6rem;
   margin-inline: auto;
+  margin-bottom: auto;
 
   #sectionTools {
     padding-block: 1.6rem;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    gap: 2rem;
   }
 `;
 
@@ -35,42 +37,43 @@ export const SubHeader = styled.section`
   padding-block: 1.6rem;
   align-items: center;
 `;
+
 export const SearchInputs = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 32rem;
 
   input {
     color: ${(props) => props.theme.mainColorDark};
     font-size: 2.2rem;
     padding: 0.5rem;
     border: none;
-    border-radius: 0.3rem;
+    border-bottom: 2px solid ${(props) => props.theme.mainColor};
     height: 3.2rem;
+    background-color: transparent;
+    max-width: 32rem;
   }
 `;
 
 export const Checkbox = styled.div`
   display: flex;
   align-items: center;
-  color: #333;
-
-  input {
-    margin-right: 1rem;
-    width: 1.75rem;
-  }
+  color: #444;
 `;
 
 export const ButtonOpenModalForm = styled.button`
-  background: ${(props) => props.theme.mainColorLight};
+  background: ${(props) => props.theme.mainColor};
   color: ${(props) => props.theme.colorLight};
   border: none;
   cursor: pointer;
-  font-size: 2.2rem;
-  padding-block: 0.5rem;
-  border-radius: 0.3rem;
+  font-size: 1.8rem;
+  padding: 1rem;
+  border-radius: 0.25rem;
   transition: 200ms;
+  width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 7px #00000055;
+  margin-left: auto;
 
   :hover {
     background-color: ${(props) => props.theme.mainColorDark};
@@ -89,28 +92,23 @@ export const Footer = styled.div`
 
     p {
       text-align: center;
-      color: ${(props) => props.theme.mainColorLight};
-
-      :first-child {
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-      }
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: ${(props) => props.theme.mainColor};
+      font-weight: 600;
+      font-size: 1.4rem;
     }
 
     a {
       color: #555;
       text-decoration: none;
-      align-self: flex-end;
+      align-self: center;
+      font-size: 1.4rem;
 
       :hover {
         color: ${(props) => props.theme.mainColor};
-        color: #00aa00;
       }
     }
   }
-`;
-
-export const Divider = styled.div`
-  border-bottom: 1px solid #bbb;
 `;

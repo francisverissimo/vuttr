@@ -15,7 +15,7 @@ export default createGlobalStyle`
   body {
     font-size: 1.6rem;
     font-family: "Montserrat", sans-serif;
-    background: #ede6db;
+    background-color: #e7e5e4;
     min-height: 100vh;
   }
 `;

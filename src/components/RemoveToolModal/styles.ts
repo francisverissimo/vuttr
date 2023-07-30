@@ -18,7 +18,7 @@ export const OverlayModal = styled.div`
     height: auto;
     width: 62rem;
     color: ${(props) => props.theme.mainColor};
-    border-radius: 0.5rem;
+    border-radius: 1rem;
 
     #closeForm {
       background-color: #ff000022;
@@ -29,7 +29,7 @@ export const OverlayModal = styled.div`
       text-align: right;
       color: #ff0000bb;
       cursor: pointer;
-      transition: 200ms;
+      transition: 100ms;
 
       :hover {
         color: #ff0000;
@@ -66,7 +66,7 @@ export const OverlayModal = styled.div`
         font-weight: bold;
 
         :hover {
-          background: ${(props) => props.theme.mainColorLight}22;
+          background: ${(props) => props.theme.colorLight}22;
         }
       }
 

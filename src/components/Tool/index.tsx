@@ -1,22 +1,14 @@
-import { TrashSimple } from "phosphor-react";
 import { useState } from "react";
 import { animated, useTransition } from "react-spring";
+import { Tool as ToolType } from "../../types";
 import { RemoveToolModal } from "../RemoveToolModal";
+import { TrashSimple } from "phosphor-react";
 import { ButtonRemoveTool, ToolCard } from "./styles";
 
-type ToolsType = {
-  id: number;
-  title: string;
-  description: string;
-  link: string;
-  tags: string[];
-  // getAllTools: () => void;
-};
-
-export function Tool(props: ToolsType) {
+export function Tool(props: ToolType) {
   const [showModalRemove, setShowModalRemove] = useState(false);
   const transtion = useTransition(showModalRemove, {
-    config: { duration: 250 },
+    config: { duration: 128 },
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -24,20 +16,6 @@ export function Tool(props: ToolsType) {
 
   function openModalRemove() {
     setShowModalRemove((e) => !e);
-  }
-
-  async function deleteTool(toolId: number) {
-    try {
-      await fetch(`http://localhost:3000/tools/${toolId}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      setShowModalRemove(false);
-      // props.getAllTools();
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   return (
@@ -52,19 +30,19 @@ export function Tool(props: ToolsType) {
       <div className="description">{props.description}</div>
       <div className="tags">{props.tags}</div>
 
-      {transtion((style, item) =>
-        item ? (
-          <animated.div style={style}>
-            <RemoveToolModal
-              closeModalRemove={() => setShowModalRemove((e) => !e)}
-              setShowModalRemove={setShowModalRemove}
-              showModalRemove={showModalRemove}
-              toolId={props.id}
-              toolTitle={props.title}
-              deleteTool={() => deleteTool(props.id)}
-            />
-          </animated.div>
-        ) : null
+      {transtion(
+        (style, item) =>
+          item && (
+            <animated.div style={style}>
+              <RemoveToolModal
+                toolId={props.id}
+                toolTitle={props.title}
+                showModalRemove={showModalRemove}
+                setShowModalRemove={setShowModalRemove}
+                closeModalRemove={() => setShowModalRemove((e) => !e)}
+              />
+            </animated.div>
+          )
       )}
     </ToolCard>
   );

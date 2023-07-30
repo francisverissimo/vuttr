@@ -5,10 +5,11 @@ export const ToolCard = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1.6rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  box-shadow: 0.3rem 0.3rem 0.6rem #ccc, -0.3rem -0.3rem 0.6rem #ccc;
+  box-shadow: 0.5rem 0.5rem 2rem #00000011, -0.5rem -0.5rem 2rem #00000011;
+  background-color: #f5f5f4;
 
   .headerTool {
     display: flex;

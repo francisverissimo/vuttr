@@ -1,25 +1,25 @@
 import { X } from "phosphor-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { OverlayForm } from "./styles";
+import { useTools } from "../../hooks/useTools";
 
 type AddNewToolType = {
   onClickCloseButton: () => void;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  // getAllTools: () => void;
 };
 
-export function AddNewTool(props: AddNewToolType) {
+export function AddNewTool({ onClickCloseButton, setShowModal, showModal }: AddNewToolType) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [tags, setTags] = useState("");
-
+  const { addTool } = useTools();
   const modalFormRef = useRef(null);
 
   const keypress = useCallback(
-    (e: KeyboardEvent) => e.key === "Escape" && props.setShowModal(false),
-    [props.setShowModal, props.showModal]
+    (e: KeyboardEvent) => e.key === "Escape" && setShowModal(false),
+    [setShowModal, showModal]
   );
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function AddNewTool(props: AddNewToolType) {
 
   function closeModalForm(e: React.MouseEvent<HTMLDivElement>) {
     if (modalFormRef.current === e.target) {
-      props.setShowModal(false);
+      setShowModal(false);
     }
   }
 
@@ -57,7 +57,7 @@ export function AddNewTool(props: AddNewToolType) {
 
   function scrollDownPage() {
     window.scrollTo({
-      top: document.body.scrollHeight,
+      top: 0,
       behavior: "smooth",
     });
   }
@@ -72,19 +72,8 @@ export function AddNewTool(props: AddNewToolType) {
       tags: handleTags(tags),
     };
 
-    try {
-      await fetch("http://localhost:3000/tools", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formInputValues),
-      });
-
-      props.setShowModal(false);
-      // props.getAllTools();
-    } catch (error) {
-      console.error(error);
-    }
-
+    addTool(formInputValues);
+    setShowModal(false);
     scrollDownPage();
   }
 
@@ -93,27 +82,17 @@ export function AddNewTool(props: AddNewToolType) {
       <div id="formAddNewTool">
         <div id="headerForm">
           <h3>Add new tool</h3>
-          <div id="closeForm" onClick={props.onClickCloseButton}>
+          <div id="closeForm" onClick={onClickCloseButton}>
             <X size={32} />
           </div>
         </div>
 
         <form onSubmit={addNewToolToDb}>
           <label htmlFor="">Tool name</label>
-          <input
-            type="text"
-            required
-            onChange={(event) => setTitle(event.target.value)}
-            value={title}
-          />
+          <input type="text" required onChange={(event) => setTitle(event.target.value)} value={title} />
 
           <label htmlFor="">Tool link</label>
-          <input
-            type="text"
-            required
-            onChange={(event) => setLink(event.target.value)}
-            value={link}
-          />
+          <input type="text" required onChange={(event) => setLink(event.target.value)} value={link} />
 
           <label htmlFor="">Tool description</label>
           <textarea
@@ -123,12 +102,7 @@ export function AddNewTool(props: AddNewToolType) {
           />
 
           <label htmlFor="tags">Tags</label>
-          <input
-            type="text"
-            required
-            onChange={(event) => setTags(event.target.value)}
-            value={tags}
-          />
+          <input type="text" required onChange={(event) => setTags(event.target.value)} value={tags} />
 
           <button type="submit">Add tool</button>
         </form>
